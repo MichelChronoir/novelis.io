@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novelis| Partner Menulis Masa Depan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dark-theme">
+    <div id="app">
+        <div id="login-screen" class="overlay">
+            <div class="glass-card login-box">
+                <h2 class="neon-text">Novellix AI</h2>
+                <p>Masuk untuk mulai menulis mahakarya Anda</p>
+                <form id="login-form">
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit" class="btn-primary">Masuk</button>
+                    <p class="foot-note">Belum punya akun? <span class="highlight">Daftar</span></p>
+                </form>
+            </div>
+        </div>
+
+        <main id="workspace" class="hidden">
+            <nav class="sidebar glass">
+                <div class="logo-area">
+                    <h3 class="neon-text">NX</h3>
+                </div>
+                <div class="nav-links">
+                    <button title="Proyek Baru"><i data-lucide="plus-circle"></i></button>
+                    <button title="Daftar Chapter"><i data-lucide="book-open"></i></button>
+                    <button title="Memory Bank"><i data-lucide="brain-circuit"></i></button>
+                    <button title="Statistik"><i data-lucide="bar-chart-3"></i></button>
+                </div>
+                <button class="settings-btn"><i data-lucide="settings"></i></button>
+            </nav>
+
+            <section class="editor-container">
+                <header class="editor-header glass">
+                    <input type="text" id="chapter-title" value="Tanpa Judul">
+                    <div class="stats">Kata: <span id="word-count">0</span> | Target: 1500</div>
+                </header>
+                <textarea id="main-editor" placeholder="Mulai petualanganmu di sini..."></textarea>
+            </section>
+
+            <aside class="ai-panel glass">
+                <div class="ai-header">
+                    <i data-lucide="sparkles"></i>
+                    <span>AI Ghostwriter</span>
+                </div>
+                
+                <div class="ai-controls">
+                    <label>POV Mode</label>
+                    <select id="pov-select">
+                        <option value="pov1">POV 1 (Aku)</option>
+                        <option value="pov3">POV 3 (Dia/Nama)</option>
+                        <option value="mix">POV Mix</option>
+                    </select>
+
+                    <div class="action-buttons">
+                        <button class="btn-ai" onclick="generateDraft()">Generate Draft</button>
+                        <button class="btn-outline">Improve Style</button>
+                        <button class="btn-outline">Rewrite Scene</button>
+                    </div>
+                </div>
+
+                <div class="memory-peek glass">
+                    <h4>Memory Active:</h4>
+                    <ul id="active-memory">
+                        <li>Karakter: Rizky (Protagonis)</li>
+                        <li>Setting: Jakarta 2045</li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+    </div>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
