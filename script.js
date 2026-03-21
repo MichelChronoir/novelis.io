@@ -1,76 +1,77 @@
-// Navigasi Antar Layar
-const loginForm = document.getElementById('login-form');
-const loginScreen = document.getElementById('login-screen');
-const workspace = document.getElementById('workspace');
-const editor = document.getElementById('main-editor');
+function login() {
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
 
-// 1. Logika Login (Sederhana untuk GitHub Pages)
-loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('user-email').value;
-    
-    // Simpan status login
-    localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('userEmail', email);
-    
-    showWorkspace();
-});
+  if (!email || !pass) {
+    document.getElementById("error").innerText = "Isi semua field!";
+    return;
+  }
 
-function showWorkspace() {
-    loginScreen.classList.add('hidden');
-    workspace.classList.remove('hidden');
-    loadSavedData();
+  user = { email };
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+
+  renderProjects();
 }
 
-// 2. Statistik Kata
-editor.addEventListener('input', () => {
-    const text = editor.value.trim();
-    const words = text ? text.split(/\s+/).length : 0;
-    document.getElementById('word-count').innerText = words;
-    document.getElementById('char-count').innerText = text.length;
-    
-    // Tampilkan asisten jika mengetik banyak
-    const assistant = document.getElementById('ai-assistant');
-    if (words > 5) assistant.classList.remove('hidden');
-    
-    // Auto-save
-    localStorage.setItem('current_novel_content', text);
-});
-
-// 3. Simulasi Fitur AI
-function runAIAction(type) {
-    const btn = event.target;
-    const originalText = btn.innerText;
-    btn.innerText = "Sedang Berpikir...";
-    btn.disabled = true;
-
-    setTimeout(() => {
-        let aiResult = "";
-        const currentContent = editor.value;
-
-        if(type === 'generate') {
-            aiResult = "\n\n[DRAFT AI]: Langit di atas kota Jakarta tampak lebih gelap dari biasanya. Guntur bersahutan di kejauhan, seolah memberi peringatan tentang sesuatu yang besar yang akan segera terjadi...";
-            editor.value += aiResult;
-        } else if(type === 'improve') {
-            alert("Fitur AI Editor: Memperbaiki tata bahasa...");
-            // Logika rewrite di sini
-        }
-
-        btn.innerText = originalText;
-        btn.disabled = false;
-        lucide.createIcons();
-    }, 2000);
+function createProject() {
+  let project = {
+    title: "Novel Baru",
+    chapters: []
+  };
+  projects.push(project);
+  renderProjects();
 }
 
-// 4. Logout
-function logout() {
-    localStorage.clear();
-    location.reload();
+function renderProjects() {
+  let list = document.getElementById("projectList");
+  list.innerHTML = "";
+
+  projects.forEach((p, i) => {
+    let div = document.createElement("div");
+    div.innerText = p.title;
+    div.onclick = () => openProject(i);
+    list.appendChild(div);
+  });
 }
 
-// 5. Cek Session saat Load
-window.onload = () => {
-    if(localStorage.getItem('isLoggedIn') === 'true') {
-        showWorkspace();
-    }
-};
+function openProject(i) {
+  currentProject = projects[i];
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("workspace").classList.remove("hidden");
+
+  renderChapters();
+}
+
+function renderChapters() {
+  let list = document.getElementById("chapters");
+  list.innerHTML = "";
+
+  currentProject.chapters.forEach((c, i) => {
+    let li = document.createElement("li");
+    li.innerText = c.title;
+    li.onclick = () => {
+      document.getElementById("editor").value = c.content;
+    };
+    list.appendChild(li);
+  });
+}
+
+/* ===================== */
+/* 🤖 AI SIMULATION */
+/* ===================== */
+
+function generateAI() {
+  let text = "Langit malam menggantung sunyi, dan langkah kaki itu menggema seperti rahasia yang enggan terungkap...";
+  document.getElementById("editor").value += "\n\n" + text;
+}
+
+function improveText() {
+  let editor = document.getElementById("editor");
+  editor.value = editor.value + "\n\n[Improved oleh AI ✨]";
+}
+
+function rewriteText() {
+  let editor = document.getElementById("editor");
+  editor.value = "Versi rewrite:\n\n" + editor.value;
+}
