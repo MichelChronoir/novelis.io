@@ -1,44 +1,75 @@
-/* Pastikan class hidden bekerja */
-.hidden {
-    display: none !important;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f1a;
+  color: white;
 }
 
-/* Scrollbar Keren */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-thumb {
-    background: var(--neon-purple);
-    border-radius: 10px;
+.hidden { display: none; }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-/* Workspace Layout Fix */
+/* Glassmorphism */
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.box input {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 250px;
+}
+
+button {
+  background: linear-gradient(45deg, purple, blue);
+  border: none;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Layout */
 #workspace {
-    display: flex; /* Gunakan flex agar lebih responsif */
-    height: 100vh;
-    width: 100vw;
+  display: flex;
+  height: 100vh;
 }
 
-.sidebar { width: 80px; flex-shrink: 0; }
-.editor-container { flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; }
-.ai-panel { width: 320px; flex-shrink: 0; padding: 20px; overflow-y: auto; }
-
-/* AI Assistant Bubble */
-#ai-assistant {
-    position: fixed;
-    bottom: 30px;
-    right: 350px;
-    padding: 15px;
-    border-radius: 15px;
-    max-width: 250px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    font-size: 0.9rem;
-    animation: fadeInUp 0.5s ease;
+aside {
+  width: 200px;
+  background: #14142a;
+  padding: 10px;
 }
 
-@keyframes fadeInUp {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+main {
+  flex: 1;
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 20px;
+  font-size: 16px;
+}
+
+.ai-panel {
+  width: 220px;
+  background: #14142a;
+  padding: 10px;
 }
