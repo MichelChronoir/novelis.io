@@ -1,18 +1,22 @@
-const novelMemory = {
-    projectTitle: "Sebelum Akibat",
-    author: "Michellyn",
-    characters: [
-        { name: "Rizky Pratama", role: "Protagonis", traits: "Analitis, Melankolis" },
-        { name: "Fajar Ramadhan", role: "Rival", traits: "Ambisius, Impulsif" }
-    ],
-    worldBuilding: {
-        location: "Neo-Jakarta",
-        year: "2045",
-        rules: "Waktu dapat diputar ulang maksimal 5 detik."
-    }
+let memory = {
+  title: "",
+  chapters: [],
+  notes: {}
 };
 
-// Fungsi untuk menarik konteks memori ke AI
-function getContext() {
-    return `Konteks: Tokoh utama ${novelMemory.characters[0].name} berada di ${novelMemory.worldBuilding.location}`;
+function saveData() {
+  memory.title = document.getElementById("title").value;
+  memory.current = document.getElementById("editor").value;
+
+  localStorage.setItem("novelData", JSON.stringify(memory));
+  alert("Tersimpan!");
+}
+
+function loadData() {
+  const data = JSON.parse(localStorage.getItem("novelData"));
+  if (!data) return alert("Tidak ada data!");
+
+  memory = data;
+  document.getElementById("title").value = data.title;
+  document.getElementById("editor").value = data.current;
 }
