@@ -1,77 +1,37 @@
-function login() {
-  let email = document.getElementById("email").value;
-  let pass = document.getElementById("password").value;
+function generateChapter() {
+  const pov = document.getElementById("pov").value;
+  const useOpenAI = document.getElementById("openai").checked;
+  const useClaude = document.getElementById("claude").checked;
+  const useGemini = document.getElementById("gemini").checked;
 
-  if (!email || !pass) {
-    document.getElementById("error").innerText = "Isi semua field!";
-    return;
+  let models = [];
+  if (useOpenAI) models.push("OpenAI");
+  if (useClaude) models.push("Claude");
+  if (useGemini) models.push("Gemini");
+
+  let text = `\n[GENERATED BAB]\nPOV: ${pov}\nModel: ${models.join(", ")}\n\n`;
+
+  text += generateDummyText(1200);
+
+  document.getElementById("editor").value = text;
+}
+
+function generateDummyText(words) {
+  let result = "";
+  const sample = "cerita misterius penuh konflik emosi perjalanan takdir cinta gelap rahasia dunia karakter kuat ";
+
+  for (let i = 0; i < words; i++) {
+    result += sample.split(" ")[Math.floor(Math.random() * 10)] + " ";
   }
 
-  user = { email };
-  document.getElementById("loginPage").classList.add("hidden");
-  document.getElementById("dashboard").classList.remove("hidden");
-
-  renderProjects();
+  return result;
 }
 
-function createProject() {
-  let project = {
-    title: "Novel Baru",
-    chapters: []
-  };
-  projects.push(project);
-  renderProjects();
-}
+function editText() {
+  let text = document.getElementById("editor").value;
 
-function renderProjects() {
-  let list = document.getElementById("projectList");
-  list.innerHTML = "";
+  text = text.replace(/aku/g, "saya");
+  text += "\n\n[AI EDIT]: Gaya bahasa diperbaiki, alur diperjelas.";
 
-  projects.forEach((p, i) => {
-    let div = document.createElement("div");
-    div.innerText = p.title;
-    div.onclick = () => openProject(i);
-    list.appendChild(div);
-  });
-}
-
-function openProject(i) {
-  currentProject = projects[i];
-  document.getElementById("dashboard").classList.add("hidden");
-  document.getElementById("workspace").classList.remove("hidden");
-
-  renderChapters();
-}
-
-function renderChapters() {
-  let list = document.getElementById("chapters");
-  list.innerHTML = "";
-
-  currentProject.chapters.forEach((c, i) => {
-    let li = document.createElement("li");
-    li.innerText = c.title;
-    li.onclick = () => {
-      document.getElementById("editor").value = c.content;
-    };
-    list.appendChild(li);
-  });
-}
-
-/* ===================== */
-/* 🤖 AI SIMULATION */
-/* ===================== */
-
-function generateAI() {
-  let text = "Langit malam menggantung sunyi, dan langkah kaki itu menggema seperti rahasia yang enggan terungkap...";
-  document.getElementById("editor").value += "\n\n" + text;
-}
-
-function improveText() {
-  let editor = document.getElementById("editor");
-  editor.value = editor.value + "\n\n[Improved oleh AI ✨]";
-}
-
-function rewriteText() {
-  let editor = document.getElementById("editor");
-  editor.value = "Versi rewrite:\n\n" + editor.value;
+  document.getElementById("editor").value = text;
 }
