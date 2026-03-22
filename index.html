@@ -1,4 +1,34 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Novel</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
 
+    <!-- GANTI src dengan website kamu sendiri -->
+    <iframe id="contentFrame" src="index.html"></iframe>
+
+    <script>
+        // Optional: kontrol iframe lokal saja
+        window.addEventListener('message', function(event) {
+
+            if (event.data && event.data.type === 'reload') {
+         
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,5 +71,16 @@
         });
     </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+       window.location.reload();
+            }
+
+            if (event.data && event.data.type === 'url') {
+                window.open(event.data.url, '_blank');
+            }
+        });
+    </script>
+
 </body>
 </html>
