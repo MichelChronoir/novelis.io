@@ -1,37 +1,45 @@
+
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Novel Writer</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>AI Novel Writer</h1>
+    <iframe id="contentFrame" src="https://app.emergent.sh/loading-preview?host=bahasa-lokal-2" allowfullscreen></iframe>
+    <script>
+        // Listen for messages from the iframe
+        window.addEventListener('message', function(event) {
 
-    <div class="controls">
-      <input id="title" placeholder="Judul Novel">
-      <select id="pov">
-        <option value="1">POV 1</option>
-        <option value="2">POV 2</option>
-        <option value="3">POV 3</option>
-        <option value="mix">POV 1 + 3</option>
-      </select>
+        	console.log(event.origin);
+            // Optional: Add origin check for security
+            // if (!['https://dev.emergentagent.com', 'https://app.emergent.sh'].includes(event.origin)) return;
 
-      <label><input type="checkbox" id="openai" checked> OpenAI</label>
-      <label><input type="checkbox" id="claude"> Claude</label>
-      <label><input type="checkbox" id="gemini"> Gemini</label>
+            if (event.data && event.data.type === 'reload') {
+                const iframe = document.getElementById('contentFrame');
+                window.location.reload();
+            }
 
-      <button onclick="generateChapter()">Generate Bab</button>
-      <button onclick="editText()">AI Edit</button>
-      <button onclick="saveData()">Save</button>
-      <button onclick="loadData()">Load</button>
-    </div>
-
-    <textarea id="editor" placeholder="Tulis atau generate novel di sini..."></textarea>
-  </div>
-
-  <script src="data.js"></script>
-  <script src="script.js"></script>
+            if (event.data && event.data.type === 'url') {
+                const iframe = document.getElementById('contentFrame');
+                window.open(event.data.url, '_blank');
+            }
+        });
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
