@@ -1,75 +1,45 @@
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #0f0f1a;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
   color: white;
+  margin: 0;
 }
 
-.hidden { display: none; }
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
 
-.center {
+h1 {
+  text-align: center;
+}
+
+.controls {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-/* Glassmorphism */
-.glass {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 30px;
-}
-
-.box input {
-  display: block;
-  margin: 10px 0;
+input, select, button {
   padding: 10px;
-  width: 250px;
+  border-radius: 8px;
+  border: none;
 }
 
 button {
-  background: linear-gradient(45deg, purple, blue);
-  border: none;
-  padding: 10px;
+  background: #2563eb;
   color: white;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  transform: scale(1.05);
-}
-
-/* Layout */
-#workspace {
-  display: flex;
-  height: 100vh;
-}
-
-aside {
-  width: 200px;
-  background: #14142a;
-  padding: 10px;
-}
-
-main {
-  flex: 1;
 }
 
 textarea {
   width: 100%;
-  height: 100%;
-  background: transparent;
-  color: white;
+  height: 400px;
+  padding: 15px;
+  border-radius: 10px;
   border: none;
-  padding: 20px;
-  font-size: 16px;
+  resize: none;
 }
 
-.ai-panel {
-  width: 220px;
-  background: #14142a;
-  padding: 10px;
-}
