@@ -2,58 +2,36 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>AI Novel Studio</title>
+  <title>AI Novel Writer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="container">
+    <h1>AI Novel Writer</h1>
 
-<!-- LOGIN -->
-<div id="loginPage" class="center">
-  <div class="glass box">
-    <h1>AI Novel Studio</h1>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="login()">Masuk</button>
-    <p id="error"></p>
+    <div class="controls">
+      <input id="title" placeholder="Judul Novel">
+      <select id="pov">
+        <option value="1">POV 1</option>
+        <option value="2">POV 2</option>
+        <option value="3">POV 3</option>
+        <option value="mix">POV 1 + 3</option>
+      </select>
+
+      <label><input type="checkbox" id="openai" checked> OpenAI</label>
+      <label><input type="checkbox" id="claude"> Claude</label>
+      <label><input type="checkbox" id="gemini"> Gemini</label>
+
+      <button onclick="generateChapter()">Generate Bab</button>
+      <button onclick="editText()">AI Edit</button>
+      <button onclick="saveData()">Save</button>
+      <button onclick="loadData()">Load</button>
+    </div>
+
+    <textarea id="editor" placeholder="Tulis atau generate novel di sini..."></textarea>
   </div>
-</div>
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="hidden">
-  <header>
-    <h2>📚 Proyek Novel</h2>
-    <button onclick="createProject()">+ Proyek Baru</button>
-  </header>
-  <div id="projectList"></div>
-</div>
-
-<!-- WORKSPACE -->
-<div id="workspace" class="hidden">
-  <aside>
-    <h3>Chapters</h3>
-    <ul id="chapters"></ul>
-  </aside>
-
-  <main>
-    <textarea id="editor" placeholder="Mulai menulis..."></textarea>
-  </main>
-
-  <section class="ai-panel">
-    <h3>AI Tools</h3>
-    <button onclick="generateAI()">Generate Chapter</button>
-    <button onclick="improveText()">Improve Writing</button>
-    <button onclick="rewriteText()">Rewrite Scene</button>
-
-    <select id="pov">
-      <option>POV 1</option>
-      <option>POV 2</option>
-      <option>POV 3</option>
-      <option>POV Mix</option>
-    </select>
-  </section>
-</div>
-
-<script src="data.js"></script>
-<script src="script.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
